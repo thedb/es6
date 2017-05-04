@@ -95,7 +95,9 @@ Preload.prototype = {
       }else if(choose == 'progress'){
         this.Progress();
       }else if(choose == 'complete'){
-        console.log('2')
+        if(this.progress === 100){
+          this.complete();
+        }
         // if(this.progress === 100){
         //   this.complete();
         // }
@@ -108,8 +110,8 @@ Preload.prototype = {
     
     return this;
   },
-  complete(callback){
-    this.complete_cb = callback || function(){};
+  complete(){
+    this.complete_cb = this.on_cb || function(){};
     this.complete_cb();
     console.log('all image has loaded')
     // try {
@@ -132,9 +134,9 @@ pre.on('progress',function(){
   console.log( this.progress + '%');
 })
 
-// pre.on('complete',function(){
-  
-// })
+pre.on('complete',function(){
+  console.log('2')
+})
 
 
 
